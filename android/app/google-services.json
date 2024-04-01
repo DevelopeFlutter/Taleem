@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "979508654390",
+    "project_id": "softcourses-dbd72",
+    "storage_bucket": "softcourses-dbd72.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:979508654390:android:090c45428512169e900397",
+        "android_client_info": {
+          "package_name": "com.taptitudeapp.coursehub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "979508654390-4j8cgc5m9tqdperfo6815d3n3krn0ijc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.taptitudeapp.coursehub",
+            "certificate_hash": "90502a1dc7cfc41abb997fa5656c4f038bee8eaf"
+          }
+        },
+        {
+          "client_id": "979508654390-mku70iidjht8q40qdd6dgp3ogp2arst6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDf1-4OO0EyaMZzLqT-tbL72_JuYdhylew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "979508654390-mku70iidjht8q40qdd6dgp3ogp2arst6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
