@@ -74,13 +74,14 @@ class _AboutusState extends State<Aboutus> {
               children: <Widget>[
                 CircleAvatar(
                   radius: 60.0,
-                  backgroundImage: AssetImage('assets/images/Profile.jpg'),
+                  child: Center( child: Icon(Icons.person),),
+                  // backgroundImage: AssetImage('assets/images/Profile.jpg'),
                 ),
                 SizedBox(
                   height: 10,
                 ),
                 Text(
-                  'Ahmad Jamal',
+                  'Usman Ali',
                   style: TextStyle(
                     fontFamily: 'Pacifico',
                     fontWeight: FontWeight.bold,
@@ -116,7 +117,7 @@ class _AboutusState extends State<Aboutus> {
                       color: Color(0xff0F3460),
                     ),
                     title: Text(
-                      '+92 309 5030486',
+                      '+92 319 1169465',
                       style: TextStyle(
                         color: Color(0xff0F3460),
                       ),
@@ -131,7 +132,7 @@ class _AboutusState extends State<Aboutus> {
                       color: Color(0xff0F3460),
                     ),
                     title: Text(
-                      'Heartech786@gmail.com',
+                      'usmantech12@gmail.com',
                       style: TextStyle(
                         fontSize: 14,
                         color: Color(0xff0F3460),

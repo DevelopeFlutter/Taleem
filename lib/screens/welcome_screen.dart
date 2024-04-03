@@ -17,7 +17,7 @@ class Splashscreen extends StatefulWidget {
   _SplashscreenState createState() => _SplashscreenState();
 }
 
-class _SplashscreenState extends State<Splashscreen> {
+class _SplashscreenState extends State<Splashscreen>{
   final splashDelay = 7;
 
   @override
@@ -47,7 +47,7 @@ class _SplashscreenState extends State<Splashscreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding:  EdgeInsets.all(8.0),
               child: Image(
                 image: AssetImage('assets/images/welcome.png'),
                 width: 350,
@@ -69,7 +69,6 @@ class _SplashscreenState extends State<Splashscreen> {
               style: GoogleFonts.kanit(
                   color: Colors.white,
                   fontSize: 15,
-                  // letterSpacing: 1,
                   fontWeight: FontWeight.w200),
             ),
           ],

@@ -1,3 +1,4 @@
+import 'package:course_hub/helper/Adids.dart';
 import 'package:course_hub/services/Authservices.dart';
 import 'package:flutter/material.dart';
 
@@ -70,7 +71,7 @@ class _DonateresourseState extends State<Donateresourse> {
     super.didChangeDependencies();
     bannerad = BannerAd(
         size: AdSize.banner,
-        adUnitId: 'ca-app-pub-4374438450741071/6915856318',
+        adUnitId:BannerID5 ,
         listener: BannerAdListener(onAdLoaded: (ad) {
           setState(() {
             addloadd = true;

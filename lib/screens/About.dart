@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, file_names, must_be_immutable, unnecessary_this
 
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -9,6 +10,8 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:readmore/readmore.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+
+import '../helper/Adids.dart';
 import '../helper/helper.dart';
 import '../main.dart';
 
@@ -44,7 +47,7 @@ class _AboutscreenState extends State<Aboutscreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     InterstitialAd.load(
-        adUnitId: 'ca-app-pub-4374438450741071/1088814563',
+        adUnitId:InterstitialID1,
         request: AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
             onAdLoaded: ((ad) {
@@ -56,7 +59,7 @@ class _AboutscreenState extends State<Aboutscreen> {
             onAdFailedToLoad: ((error) {})));
     bannerad = BannerAd(
         size: AdSize.banner,
-        adUnitId: 'ca-app-pub-4374438450741071/9142650128',
+        adUnitId: BannerID2,
         listener: BannerAdListener(onAdLoaded: (ad) {
           setState(() {
             addloadd = true;
@@ -443,7 +446,7 @@ class _AboutpptscreenState extends State<Aboutpptscreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     InterstitialAd.load(
-        adUnitId: 'ca-app-pub-4374438450741071/1088814563',
+        adUnitId: InterstitialID2,
         request: AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
             onAdLoaded: ((ad) {
@@ -455,7 +458,7 @@ class _AboutpptscreenState extends State<Aboutpptscreen> {
             onAdFailedToLoad: ((error) {})));
     bannerad = BannerAd(
         size: AdSize.banner,
-        adUnitId: 'ca-app-pub-4374438450741071/9142650128',
+        adUnitId:BannerID1,
         listener: BannerAdListener(onAdLoaded: (ad) {
           setState(() {
             addloadd = true;

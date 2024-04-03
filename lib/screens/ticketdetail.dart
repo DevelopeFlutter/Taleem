@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:course_hub/helper/Adids.dart';
 import 'package:course_hub/screens/doanteresource.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class _TicketdetailState extends State<Ticketdetail> {
   void didChangeDependencies() {
     super.didChangeDependencies();
      InterstitialAd.load(
-        adUnitId: 'ca-app-pub-4374438450741071/6210964485',
+        adUnitId:InterstitialID4 ,
         request: AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
             onAdLoaded: ((ad) {
@@ -69,7 +70,7 @@ class _TicketdetailState extends State<Ticketdetail> {
             onAdFailedToLoad: ((error) {})));
     bannerad = BannerAd(
         size: AdSize.banner,
-        adUnitId: 'ca-app-pub-4374438450741071/6915856318',
+        adUnitId:BannerID9 ,
         listener: BannerAdListener(onAdLoaded: (ad) {
           setState(() {
             addloadd = true;

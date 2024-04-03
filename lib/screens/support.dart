@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:course_hub/helper/Adids.dart';
 import 'package:course_hub/model/course_model.dart';
 import 'package:course_hub/widgets/support_ticket.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -49,7 +50,7 @@ class _SupportTicketState extends State<SupportTicket> {
     super.didChangeDependencies();
     bannerad = BannerAd(
         size: AdSize.banner,
-        adUnitId: 'ca-app-pub-4374438450741071/6915856318',
+        adUnitId:BannerID8 ,
         listener: BannerAdListener(onAdLoaded: (ad) {
           setState(() {
             addloadd = true;

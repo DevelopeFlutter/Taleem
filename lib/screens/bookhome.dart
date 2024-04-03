@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../Network checker/network_aware.dart';
 import '../Network checker/network_service.dart';
+import '../helper/Adids.dart';
 import '../helper/helper.dart';
 import '../model/usermodel.dart';
 import '../widgets/course_card.dart';
@@ -47,7 +48,7 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
     super.didChangeDependencies();
     bannerad = BannerAd(
         size: AdSize.banner,
-        adUnitId: 'ca-app-pub-4374438450741071/6915856318',
+        adUnitId: BannerID3,
         listener: BannerAdListener(onAdLoaded: (ad) {
           setState(() {
             addloadd = true;

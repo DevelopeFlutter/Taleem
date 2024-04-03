@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:course_hub/helper/Adids.dart';
 
 import 'package:course_hub/screens/Homepage.dart';
 import 'package:course_hub/screens/bookhome.dart';
@@ -49,7 +50,7 @@ class _GotohomeState extends State<Gotohome> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     InterstitialAd.load(
-        adUnitId: 'ca-app-pub-4374438450741071/6210964485',
+        adUnitId: InterstitialID3,
         request: AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
             onAdLoaded: ((ad) {
@@ -61,7 +62,7 @@ class _GotohomeState extends State<Gotohome> {
             onAdFailedToLoad: ((error) {})));
     bannerad = BannerAd(
         size: AdSize.banner,
-        adUnitId: 'ca-app-pub-4374438450741071/9142650128',
+        adUnitId: BannerID4,
         listener: BannerAdListener(onAdLoaded: (ad) {
           setState(() {
             addloadd = true;

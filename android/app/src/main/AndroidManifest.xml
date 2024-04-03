@@ -13,7 +13,7 @@
         android:icon="@mipmap/ic_launcher">
          <meta-data
       android:name="com.google.android.gms.ads.APPLICATION_ID"
-      android:value="ca-app-pub-4374438450741071~4077369163"/>
+      android:value="ca-app-pub-4047483384273043~9655063314"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
