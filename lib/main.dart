@@ -24,7 +24,16 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+      // options: FirebaseOptions(
+        
+    // apiKey: '',
+    // appId: 'id',
+    // messagingSenderId: 'sendid',
+    // projectId: 'myapp',
+    // storageBucket: 'myapp-b9yt18.appspot.com',
+  // )
+  );
   await MobileAds.instance.initialize();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
