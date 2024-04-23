@@ -8,6 +8,8 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'screens/welcome_screen.dart';
 
+double mheight =0.0;
+double mwidth =0.0;
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
     'High Importance Notifications', // title
@@ -26,14 +28,14 @@ Future<void> main() async {
 
   await Firebase.initializeApp(
       // options: FirebaseOptions(
-        
-    // apiKey: '',
-    // appId: 'id',
-    // messagingSenderId: 'sendid',
-    // projectId: 'myapp',
-    // storageBucket: 'myapp-b9yt18.appspot.com',
-  // )
-  );
+
+      // apiKey: '',
+      // appId: 'id',
+      // messagingSenderId: 'sendid',
+      // projectId: 'myapp',
+      // storageBucket: 'myapp-b9yt18.appspot.com',
+      // )
+      );
   await MobileAds.instance.initialize();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
@@ -56,6 +58,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    mheight = MediaQuery.sizeOf(context).height;
+    mwidth = MediaQuery.sizeOf(context).width;
     return MaterialApp(
         title: 'Taleem',
         debugShowCheckedModeBanner: false,

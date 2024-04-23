@@ -92,7 +92,7 @@ class _LogIn_regState extends State<LogIn_reg> {
                           Icons.account_box,
                           color: Constant().pinkcolor,
                         ),
-                        'Enter Full Name here', (value) {
+                        'Enter full name here', (value) {
                       if (value.isEmpty) {
                         Text('Please Enter Your Full name');
                       }
@@ -105,7 +105,7 @@ class _LogIn_regState extends State<LogIn_reg> {
                         Icons.email_rounded,
                         color: Constant().pinkcolor,
                       ),
-                      'Enter Email here', (value) {
+                      'Enter email here', (value) {
                     if (value.isEmpty) {
                       Text('Please Enter Your Full name');
                     }
@@ -118,7 +118,7 @@ class _LogIn_regState extends State<LogIn_reg> {
                         Icons.password_outlined,
                         color: Constant().pinkcolor,
                       ),
-                      'Enter Password here', (value) {
+                      'Enter password here', (value) {
                     if (value.isEmpty) {
                       Text('Please Enter Your Full name');
                     }
@@ -138,7 +138,7 @@ class _LogIn_regState extends State<LogIn_reg> {
                                     builder: (_) => Foregetpassword()));
                           },
                           child: Text(
-                            'Forget Password?',
+                            'Forgot password?',
                             style: TextStyle(
                               color: Constant().pinkcolor,
                             ),
@@ -174,8 +174,8 @@ class _LogIn_regState extends State<LogIn_reg> {
                       },
                       child: Text(
                         _islogin
-                            ? 'Already have an Account?LOGIN'
-                            : 'Create new Account here',
+                            ? 'Already have an account?Login'
+                            : 'Create new account here.',
                         style: TextStyle(
                             color: Constant().pinkcolor,
                             fontSize: 15,

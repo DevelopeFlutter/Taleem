@@ -191,17 +191,17 @@ class _SupportTicketState extends State<SupportTicket> {
                                     .collection('Ticket')
                                     .snapshots(),
                                 builder: (context,
-                                    AsyncSnapshot<QuerySnapshot> snashot) {
-                                  return loading
-                                      ? Center(
-                                          child: CircularProgressIndicator(),
-                                        )
-                                      : ListView.builder(
+                                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                                    if (snapshot.data == null) {
+                                    return CircularProgressIndicator();
+                                  }
+                                                                      return
+  ListView.builder(
                                           shrinkWrap: true,
-                                          itemCount: snashot.data !.docs.length,
+                                          itemCount: snapshot.data !.docs.length,
                                           itemBuilder: (context, index) {
                                             DocumentSnapshot? data =
-                                                snashot.data!.docs[index];
+                                                snapshot.data!.docs[index];
                                             return suppportTicket(
                                               ticketstaus,
                                               data['title'],

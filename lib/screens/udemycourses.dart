@@ -16,19 +16,18 @@ import '../model/usermodel.dart';
 import '../widgets/course_card.dart';
 import 'drawer.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class UdemyCourses extends StatefulWidget {
+  const UdemyCourses({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<UdemyCourses> createState() => _UdemyCoursesState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _UdemyCoursesState extends State<UdemyCourses> {
   final _scaffoldkey = GlobalKey<ScaffoldState>();
   bool hasusersearched = false;
   bool loading = false;
   bool loadins = false;
-
   String? coursenames;
   String? tutorname;
   String? category;
@@ -255,9 +254,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             searchresult[index]['category'],
                                             searchresult[index]['about'],
                                             searchresult[index]['demolink'],
-                                            searchresult[index] ['downloadlink'],
-                                            searchresult[index]['sendername']
-                                            );
+                                            searchresult[index]['downloadlink'],
+                                            searchresult[index]['sendername']);
                                       },
                                       separatorBuilder: (context, index) {
                                         return index % 6 == 0
@@ -282,103 +280,101 @@ class _HomeScreenState extends State<HomeScreen> {
                                     .collection('Courses')
                                     .snapshots(),
                                 builder: (context,
-                                    AsyncSnapshot<QuerySnapshot> snashot) {
-                                  return loading
-                                      ? Center(
-                                          child: CircularProgressIndicator(),
-                                        )
-                                      : ListView.builder(
-                                          shrinkWrap: true,
-                                          itemCount: snashot.data!.docs.length,
-                                          itemBuilder: (context, index) {
-                                            DocumentSnapshot? data =
-                                                snashot.data!.docs[index];
-                                            return coursecard(
-                                              context,
-                                              data['imagelink'],
-                                              data['coursename'],
-                                              data['tutorname'],
-                                              data['category'],
-                                              data['about'],
-                                              data['demolink'],
-                                              data['downloadlink'],
-                                              data['sendername']
-                                            );
-                                          },
-                                          // separatorBuilder: (context, index) {
-                                          //   return index % 3 == 0
-                                          //       ? Padding(
-                                          //           padding:
-                                          //               const EdgeInsets.all(
-                                          //                   0.0),
-                                          //           child: SizedBox(
-                                          //             height: 320,
-                                          //             // width: 1000,
-                                          //             child: Flexible(
-                                          //                 child: StreamBuilder(
-                                          //                     stream: FirebaseFirestore
-                                          //                         .instance
-                                          //                         .collection(
-                                          //                             'Books')
-                                          //                         .snapshots(),
-                                          //                     builder: (context,
-                                          //                         AsyncSnapshot<
-                                          //                                 QuerySnapshot>
-                                          //                             snapshot) {
-                                          //                       return bookloading
-                                          //                           ? Center(
-                                          //                               child:
-                                          //                                   CircularProgressIndicator(),
-                                          //                             )
-                                          //                           : ListView
-                                          //                               .builder(
-                                          //                               shrinkWrap:
-                                          //                                   true,
-                                          //                               scrollDirection:
-                                          //                                   Axis.horizontal,
-                                          //                               itemCount: snapshot
-                                          //                                   .data!
-                                          //                                   .docs
-                                          //                                   .length,
-                                          //                               itemBuilder:
-                                          //                                   (context,
-                                          //                                       index) {
-                                          //                                 DocumentSnapshot?
-                                          //                                     data =
-                                          //                                     snapshot.data!.docs[index];
-                                          //                                 return Padding(
-                                          //                                   padding:
-                                          //                                       const EdgeInsets.all(8.0),
-                                          //                                   child:
-                                          //                                       coursecard(
-                                          //                                     context,
-                                          //                                     data['imagelink'],
-                                          //                                     data['bookname'],
-                                          //                                     data['tutorname'],
-                                          //                                     data['category'],
-                                          //                                     data['about'],
-                                          //                                     data['demolink'],
-                                          //                                     data['downloadlink'],
-                                          //                                   ),
-                                          //                                 );
-                                          //                               },
-                                          //                             );
-                                          //                     })),
-                                          //           ),
-                                          //         )
-                                          //       : SizedBox(
-                                          //           height: 20,
-                                          //           child: Center(
-                                          //             child: Text(
-                                          //               '.',
-                                          //               style: TextStyle(
-                                          //                   color:
-                                          //                       Colors.white),
-                                          //             ),
-                                          //           ),
-                                          //         );
-                                          // }
-                                        );
+                                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  if (snapshot.data == null) {
+                                    return CircularProgressIndicator();
+                                  }
+                                  return ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: snapshot.data!.docs.length,
+                                    itemBuilder: (context, index) {
+                                      DocumentSnapshot? data =
+                                          snapshot.data!.docs[index];
+                                      return coursecard(
+                                          context,
+                                          data['imagelink'],
+                                          data['coursename'],
+                                          data['tutorname'],
+                                          data['category'],
+                                          data['about'],
+                                          data['demolink'],
+                                          data['downloadlink'],
+                                          data['sendername']);
+                                    },
+                                    // separatorBuilder: (context, index) {
+                                    //   return index % 3 == 0
+                                    //       ? Padding(
+                                    //           padding:
+                                    //               const EdgeInsets.all(
+                                    //                   0.0),
+                                    //           child: SizedBox(
+                                    //             height: 320,
+                                    //             // width: 1000,
+                                    //             child: Flexible(
+                                    //                 child: StreamBuilder(
+                                    //                     stream: FirebaseFirestore
+                                    //                         .instance
+                                    //                         .collection(
+                                    //                             'Books')
+                                    //                         .snapshots(),
+                                    //                     builder: (context,
+                                    //                         AsyncSnapshot<
+                                    //                                 QuerySnapshot>
+                                    //                             snapshot) {
+                                    //                       return bookloading
+                                    //                           ? Center(
+                                    //                               child:
+                                    //                                   CircularProgressIndicator(),
+                                    //                             )
+                                    //                           : ListView
+                                    //                               .builder(
+                                    //                               shrinkWrap:
+                                    //                                   true,
+                                    //                               scrollDirection:
+                                    //                                   Axis.horizontal,
+                                    //                               itemCount: snapshot
+                                    //                                   .data!
+                                    //                                   .docs
+                                    //                                   .length,
+                                    //                               itemBuilder:
+                                    //                                   (context,
+                                    //                                       index) {
+                                    //                                 DocumentSnapshot?
+                                    //                                     data =
+                                    //                                     snapshot.data!.docs[index];
+                                    //                                 return Padding(
+                                    //                                   padding:
+                                    //                                       const EdgeInsets.all(8.0),
+                                    //                                   child:
+                                    //                                       coursecard(
+                                    //                                     context,
+                                    //                                     data['imagelink'],
+                                    //                                     data['bookname'],
+                                    //                                     data['tutorname'],
+                                    //                                     data['category'],
+                                    //                                     data['about'],
+                                    //                                     data['demolink'],
+                                    //                                     data['downloadlink'],
+                                    //                                   ),
+                                    //                                 );
+                                    //                               },
+                                    //                             );
+                                    //                     })),
+                                    //           ),
+                                    //         )
+                                    //       : SizedBox(
+                                    //           height: 20,
+                                    //           child: Center(
+                                    //             child: Text(
+                                    //               '.',
+                                    //               style: TextStyle(
+                                    //                   color:
+                                    //                       Colors.white),
+                                    //             ),
+                                    //           ),
+                                    //         );
+                                    // }
+                                  );
                                 },
                               ),
                             ),

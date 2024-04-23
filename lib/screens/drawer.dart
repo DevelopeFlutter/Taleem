@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:course_hub/screens/Homepage.dart';
-import 'package:course_hub/screens/bookhome.dart';
+import 'package:course_hub/screens/udemycourses.dart';
+import 'package:course_hub/screens/medicalBooks.dart';
 import 'package:course_hub/screens/pptscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../helper/helper.dart';
 import 'aboutus.dart';
-import 'login_reg.dart';
+import 'login_signup.dart';
 
 Widget drawer(BuildContext context) {
   return Drawer(
@@ -84,10 +84,10 @@ Widget drawer(BuildContext context) {
           child: ListTile(
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => HomeScreen()));
+                  context, MaterialPageRoute(builder: (_) => UdemyCourses()));
             },
             title: Text(
-              'Udemy courses',
+              'Udemy Courses',
               style: GoogleFonts.kanit(
                   fontSize: 20,
                   color: Colors.white,
@@ -115,7 +115,7 @@ Widget drawer(BuildContext context) {
           padding: const EdgeInsets.all(8.0),
           child: ListTile(
             onTap: () async {
-              final url = Uri.parse('https://wa.link/qdvyku');
+              final url = Uri.parse('https://wa.link/lff74v');
               if (await canLaunchUrl(url)) {
                 launchUrl(url, mode: LaunchMode.externalApplication);
               } else {

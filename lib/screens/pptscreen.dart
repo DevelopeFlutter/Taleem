@@ -122,7 +122,6 @@ class _HomeScreenPPTState extends State<HomeScreenPPT> {
                         color: Color(0xffE94560),
                         borderRadius: BorderRadius.vertical(
                             bottom: Radius.circular(30.0)),
-                        // ignore: prefer_const_literals_to_create_immutables
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey,
@@ -281,17 +280,17 @@ class _HomeScreenPPTState extends State<HomeScreenPPT> {
                                     .collection('PPT')
                                     .snapshots(),
                                 builder: (context,
-                                    AsyncSnapshot<QuerySnapshot> snashot) {
-                                  return loading
-                                      ? Center(
-                                          child: CircularProgressIndicator(),
-                                        )
-                                      : ListView.builder(
+                                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                                 
+                                  if (snapshot.data == null) {
+                                    return CircularProgressIndicator();
+                                  }
+                                    return    ListView.builder(
                                           shrinkWrap: true,
-                                          itemCount: snashot.data!.docs.length,
+                                          itemCount: snapshot.data!.docs.length,
                                           itemBuilder: (context, index) {
                                             DocumentSnapshot? data =
-                                                snashot.data!.docs[index];
+                                                snapshot.data!.docs[index];
                                             return pptcard(
                                               context,
                                               data['imagelink'],

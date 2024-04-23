@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_print, prefer_const_literals_to_create_immutables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -28,7 +28,6 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
   bool hasusersearched = false;
   bool loading = false;
   bool loadins = false;
-
   String? coursenames;
   String? tutorname;
   String? category;
@@ -42,10 +41,7 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
   BannerAd? bannerad;
   bool addloadd = false;
   bool bookloading = false;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void loadBannerAd() {
     bannerad = BannerAd(
         size: AdSize.banner,
         adUnitId: BannerID3,
@@ -53,6 +49,7 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
           setState(() {
             addloadd = true;
           });
+          // bannerad!.load();
         }, onAdFailedToLoad: ((ad, error) {
           ad.dispose();
         })),
@@ -61,8 +58,15 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    print('Called');
+  }
+
+  @override
   void initState() {
     getuserdata();
+    loadBannerAd();
     super.initState();
   }
 
@@ -81,7 +85,7 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
   }
 
   List searchresult = [];
-  seach(String query) async {
+  searchMethod(String query) async {
     if (sraechctr.text.isNotEmpty) {
       setState(() {
         hasusersearched = true;
@@ -122,7 +126,6 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
                         color: Color(0xffE94560),
                         borderRadius: BorderRadius.vertical(
                             bottom: Radius.circular(30.0)),
-                        // ignore: prefer_const_literals_to_create_immutables
                         boxShadow: [
                           BoxShadow(
                             color: Colors.grey,
@@ -192,7 +195,7 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
                                     fontSize: 20, color: Colors.black),
                                 mouseCursor: MouseCursor.uncontrolled,
                                 onChanged: (val) {
-                                  seach(val);
+                                  searchMethod(val);
                                 },
                                 onTap: () {},
                                 decoration: InputDecoration(
@@ -229,13 +232,16 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 80,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: AdWidget(ad: bannerad!),
-                        ),
-                      ),
+                      addloadd
+                          ? SizedBox(
+                              width: bannerad!.size.width.toDouble(),
+                              height: bannerad!.size.height.toDouble(),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: AdWidget(ad: bannerad!),
+                              ),
+                            )
+                          : Container(),
                       hasusersearched
                           ? Expanded(
                               child: loadins
@@ -245,7 +251,7 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
                                       ),
                                     )
                                   : SingleChildScrollView(
-                                    child: ListView.builder(
+                                      child: ListView.builder(
                                         itemCount: searchresult.length,
                                         itemBuilder: (context, index) {
                                           return coursecard(
@@ -256,11 +262,13 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
                                               searchresult[index]['category'],
                                               searchresult[index]['about'],
                                               searchresult[index]['demolink'],
-                                              searchresult[index] ['downloadlink'],
-                                                 searchresult[index]['sendername'] );
+                                              searchresult[index]
+                                                  ['downloadlink'],
+                                              searchresult[index]
+                                                  ['sendername']);
                                         },
                                       ),
-                                  ),
+                                    ),
                             )
                           : Expanded(
                               child: StreamBuilder(
@@ -268,30 +276,28 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
                                     .collection('Books')
                                     .snapshots(),
                                 builder: (context,
-                                    AsyncSnapshot<QuerySnapshot> snashot) {
-                                  return loading
-                                      ? Center(
-                                          child: CircularProgressIndicator(),
-                                        )
-                                      : ListView.builder(
-                                          shrinkWrap: true,
-                                          itemCount: snashot.data!.docs.length,
-                                          itemBuilder: (context, index) {
-                                            DocumentSnapshot? data =
-                                                snashot.data!.docs[index];
-                                            return coursecard(
-                                              context,
-                                              data['imagelink'],
-                                              data['bookname'],
-                                              data['tutorname'],
-                                              data['category'],
-                                              data['about'],
-                                              data['demolink'],
-                                              data['downloadlink'],
-                                              data['sendername']
-                                            );
-                                          },
-                                        );
+                                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  if (snapshot.data == null) {
+                                    return CircularProgressIndicator();
+                                  }
+                                  return ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: snapshot.data!.docs.length,
+                                    itemBuilder: (context, index) {
+                                      DocumentSnapshot? data =
+                                          snapshot.data!.docs[index];
+                                      return coursecard(
+                                          context,
+                                          data['imagelink'],
+                                          data['bookname'],
+                                          data['tutorname'],
+                                          data['category'],
+                                          data['about'],
+                                          data['demolink'],
+                                          data['downloadlink'],
+                                          data['sendername']);
+                                    },
+                                  );
                                 },
                               ),
                             ),
@@ -308,7 +314,6 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
                     color: Color(0xffE94560),
                     borderRadius:
                         BorderRadius.vertical(bottom: Radius.circular(30.0)),
-                    // ignore: prefer_const_literals_to_create_immutables
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey,
@@ -319,13 +324,12 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
                   ),
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Center(
-                      child: Text('No Internet Conection',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.kanit(
-                              fontSize: 20, color: Colors.pink)),
-                    ),
+                    Text('No Internet Conection',
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.kanit(
+                            fontSize: 20, color: Colors.pink)),
                   ],
                 )
               ],

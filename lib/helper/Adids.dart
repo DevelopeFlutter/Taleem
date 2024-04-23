@@ -1,6 +1,5 @@
 
 // ignore_for_file: non_constant_identifier_names
-
 String BannerID1 = 'ca-app-pub-4047483384273043/7264326396';
 String BannerID2 = 'ca-app-pub-4047483384273043/2367222932';
 String InterstitialID1 = 'ca-app-pub-4047483384273043/8303227272';
@@ -14,6 +13,3 @@ String BannerID6 = 'ca-app-pub-4047483384273043/8625509525';
 String BannerID7 = 'ca-app-pub-4047483384273043/9674867310';
 String BannerID8 = 'ca-app-pub-4047483384273043/5273739259';
 String BannerID9 = 'ca-app-pub-4047483384273043/5955748612';
-
-
-

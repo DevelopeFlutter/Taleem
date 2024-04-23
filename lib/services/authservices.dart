@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 
 import '../helper/helper.dart';
 // import '../screens/Homepage.dart';
-import '../screens/login_reg.dart';
+import '../screens/login_signup.dart';
 import 'databaseservices.dart';
 
 class Authservices {

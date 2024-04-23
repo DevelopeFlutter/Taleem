@@ -1,16 +1,24 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unnecessary_this
+
+import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:course_hub/helper/Adids.dart';
+import 'package:course_hub/main.dart';
+import 'package:course_hub/screens/AllProgrammesViews/allprogrammesViewsList.dart';
 
-import 'package:course_hub/screens/Homepage.dart';
-import 'package:course_hub/screens/bookhome.dart';
+import 'package:course_hub/screens/udemycourses.dart';
+import 'package:course_hub/screens/medicalBooks.dart';
 import 'package:course_hub/screens/pptscreen.dart';
 import 'package:course_hub/screens/support.dart';
+import 'package:course_hub/widgets/bookscategoriescontainer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:provider/single_child_widget.dart';
 
 import '../helper/helper.dart';
 import '../model/usermodel.dart';
@@ -145,101 +153,135 @@ class _GotohomeState extends State<Gotohome> {
                 SizedBox(
                   height: 20,
                 ),
-                Row(
-                  children: [
-                    SizedBox(
-                      height: 20,
-                      width: screenwidth(context) * .05,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        if (loading) {
-                          interstitialAd!.show();
-                        }
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => HomeScreenbook()));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.pinkAccent[200],
-                            borderRadius: BorderRadius.circular(10)),
-                        height: 80,
-                        width: screenwidth(context) * .4,
-                        child: Center(
-                            child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Books',
-                                style: GoogleFonts.kanit(
-                                    color: Color(0xff0F3460),
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                            Spacer(),
-                            Image(
-                              image: AssetImage(
-                                'assets/images/book.png',
-                              ),
-                              width: 60,
-                            )
-                          ],
-                        )),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        // height: 20,
+                        width: screenwidth(context) * .05,
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                      width: screenwidth(context) * .1,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        if (loading) {
-                          interstitialAd!.show();
-                        }
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (_) => HomeScreenPPT()));
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.pinkAccent[200],
-                            borderRadius: BorderRadius.circular(10)),
-                        height: 80,
-                        width: screenwidth(context) * .4,
-                        child: Center(
-                            child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'PPT',
-                                style: GoogleFonts.kanit(
-                                    color: Color(0xff0F3460),
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                            Spacer(),
-                            Image(
-                              image: AssetImage(
-                                'assets/images/ppt.png',
-                              ),
-                              width: 40,
-                            ),
-                            SizedBox(
-                              width: 5,
-                            )
-                          ],
-                        )),
+                      InkWell(
+                          onTap: () {
+                            if (loading) {
+                              interstitialAd!.show();
+                            }
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => HomeScreenbook()));
+                          },
+                          child: CategoriesContainer(
+                              context,
+                              'Medical',
+                              'assets/images/book.png',
+                              mwidth * 0.4,
+                              mwidth * 50 / mwidth)),
+                      SizedBox(
+                        // height: 20,
+                        width: screenwidth(context) * .06,
                       ),
-                    ),
-                  ],
+                      InkWell(
+                          onTap: () {
+                            if (loading) {
+                              interstitialAd!.show();
+                            }
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => HomeScreenPPT()));
+                          },
+                          child: CategoriesContainer(
+                              context,
+                              'PPT',
+                              'assets/images/ppt.png',
+                              mwidth * 0.4,
+                              mwidth * 40 / mwidth)),
+                      SizedBox(
+                        // height: 20,
+                        width: screenwidth(context) * .06,
+                      ),
+                      InkWell(
+                          onTap: () {
+                            if (loading) {
+                              interstitialAd!.show();
+                            }
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => HomeScreenPPT()));
+                          },
+                          child: CategoriesContainer(
+                              context,
+                              'Computer Science',
+                              'assets/images/computerbooks.png',
+                              mwidth * 0.7,
+                              mwidth * 55 / mwidth)),
+                      SizedBox(
+                        // height: 20,
+                        width: screenwidth(context) * .06,
+                      ),
+                      InkWell(
+                          onTap: () {
+                            if (loading) {
+                              interstitialAd!.show();
+                            }
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => HomeScreenPPT()));
+                          },
+                          child: CategoriesContainer(
+                              context,
+                              'Islamic Books',
+                              'assets/images/islamicbooks.png',
+                              mwidth * 0.7,
+                              mwidth * 55 / mwidth)),
+                      SizedBox(
+                        width: screenwidth(context) * .06,
+                      ),
+                      InkWell(
+                          onTap: () {
+                            if (loading) {
+                              interstitialAd!.show();
+                            }
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => HomeScreenPPT()));
+                          },
+                          child: Padding(
+                              padding: EdgeInsets.only(),
+                              child: CategoriesContainer(
+                                  context,
+                                  'General knowledge',
+                                  'assets/images/generalknowledge.png',
+                                  mwidth * 0.7,
+                                  mwidth * 45 / mwidth))),
+                      SizedBox(
+                        width: screenwidth(context) * .02,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => AllProgrammesList()));
+                        },
+                        child: Icon(
+                          Icons.arrow_forward_ios_outlined,
+                          size: mheight * 30 / mheight,
+                          color: Color(0xffE94560),
+                        ),
+                      ),
+                      SizedBox(
+                        width: mwidth * 10 / mwidth,
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: mheight * 20 / mheight,
                 ),
                 InkWell(
                   onTap: () {
@@ -247,7 +289,7 @@ class _GotohomeState extends State<Gotohome> {
                       interstitialAd!.show();
                     }
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => HomeScreen()));
+                        MaterialPageRoute(builder: (_) => UdemyCourses()));
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -284,8 +326,8 @@ class _GotohomeState extends State<Gotohome> {
                   ),
                 ),
                 SizedBox(
-                            height: 20,
-                          ),
+                  height: 20,
+                ),
                 InkWell(
                   onTap: () {
                     if (loading) {
@@ -317,17 +359,14 @@ class _GotohomeState extends State<Gotohome> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                  'You need something not here yet. Click here',
-                                  style: GoogleFonts.kanit(
-                                      color: Color(0xff0F3460),
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w700),
-                                ),
+                                'You need something not here yet. click here',
+                                style: GoogleFonts.kanit(
+                                    color: Color(0xff0F3460),
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w700),
+                              ),
                             ],
                           ),
-                          SizedBox(
-                            width: 5,
-                          )
                         ],
                       ),
                     ),
