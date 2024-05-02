@@ -66,11 +66,8 @@ class _ForegetpasswordState extends State<Foregetpassword> {
                       Icons.email_rounded,
                       color: Constant().pinkcolor,
                     ),
-                    'Enter Email here', (value) {
-                  if (value.isEmpty) {
-                    Text('Please Enter full email here');
-                  }
-                }, email),
+                    'Enter email here',
+                    email),
                 SizedBox(
                   height: 20,
                 ),
@@ -80,8 +77,7 @@ class _ForegetpasswordState extends State<Foregetpassword> {
                     },
                     style: ElevatedButton.styleFrom(
                         minimumSize: Size(double.infinity, 70),
-                        backgroundColor: Constant().pinkcolor
-                        ),
+                        backgroundColor: Constant().pinkcolor),
                     child: _isloading
                         ? CircularProgressIndicator()
                         : Text(

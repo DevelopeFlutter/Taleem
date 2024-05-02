@@ -1,7 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:course_hub/helper/Adids.dart';
 import 'package:course_hub/services/Authservices.dart';
 import 'package:flutter/material.dart';
-
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:course_hub/screens/doanteresource.dart';
@@ -22,9 +23,8 @@ import 'drawer.dart';
 
 class Donateresourse extends StatefulWidget {
   const Donateresourse({
-   
-    Key? key,}) : super(key: key);
-
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<Donateresourse> createState() => _DonateresourseState();
@@ -36,9 +36,7 @@ class _DonateresourseState extends State<Donateresourse> {
   bool loading = false;
   bool loadins = false;
   bool ticketstaus = false;
-  
 
- 
   String? name;
   String? email;
   FirebaseFirestore fstore = FirebaseFirestore.instance;
@@ -46,10 +44,10 @@ class _DonateresourseState extends State<Donateresourse> {
   TextEditingController coverlink = TextEditingController();
   TextEditingController gdrivelink = TextEditingController();
   TextEditingController detail = TextEditingController();
-    TextEditingController authordetail = TextEditingController();
-    TextEditingController yournmae = TextEditingController();
-     final _formkey = GlobalKey<FormState>();
-     Authservices  authservice = Authservices();
+  TextEditingController authordetail = TextEditingController();
+  TextEditingController yournmae = TextEditingController();
+  final _formkey = GlobalKey<FormState>();
+  Authservices authservice = Authservices();
   BannerAd? bannerad;
   bool addloadd = false;
   bool bookloading = false;
@@ -62,8 +60,8 @@ class _DonateresourseState extends State<Donateresourse> {
     gdrivelink.dispose();
     detail.dispose();
     authordetail.dispose();
-    
-    
+
+    super.dispose();
   }
 
   @override
@@ -71,7 +69,7 @@ class _DonateresourseState extends State<Donateresourse> {
     super.didChangeDependencies();
     bannerad = BannerAd(
         size: AdSize.banner,
-        adUnitId:BannerID5 ,
+        adUnitId: BannerID5,
         listener: BannerAdListener(onAdLoaded: (ad) {
           setState(() {
             addloadd = true;
@@ -103,21 +101,11 @@ class _DonateresourseState extends State<Donateresourse> {
     });
   }
 
-  sendtoadmin()async{
-    await  authservice.donationdetail(
-      context,
-      booktitle.text,
-      authordetail.text,
-      coverlink.text,
-      gdrivelink.text,
-      yournmae.text
-      
-    );
+  sendtoadmin() async {
+    await authservice.donationdetail(context, booktitle.text, authordetail.text,
+        coverlink.text, gdrivelink.text, yournmae.text);
   }
-  
 
-
-  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -190,8 +178,10 @@ class _DonateresourseState extends State<Donateresourse> {
                               fontSize: 25,
                               fontWeight: FontWeight.w400),
                         ),
-                       
-                         SizedBox(height: 40,),
+
+                        SizedBox(
+                          height: 40,
+                        ),
                         SizedBox(
                           height: 80,
                           child: Padding(
@@ -199,96 +189,95 @@ class _DonateresourseState extends State<Donateresourse> {
                             child: AdWidget(ad: bannerad!),
                           ),
                         ),
-                       
-                       Form(
-                        key: _formkey,
-                        child: Container(
-                          decoration: BoxDecoration(
 
-                          ),
-                          child: Column(
-                            children: [
-                            customtextfeild(
-                              Icon(Icons.book_outlined, color: Colors.pink,),
-                              'Enter Book Name',
-                             (value) {
-                            if (value.isEmpty) {
-                      Text('Please Enter Book name');
-                    }
-                  },
-                  booktitle
-                            ),
-                             SizedBox(height: 10,),
-                             customtextfeild(
-                              Icon(Icons.manage_accounts, color: Colors.pink,),
-                              'Enter Author Names',
-                             (value) {
-                            if (value.isEmpty) {
-                      Text('Please Enter Book Author name');
-                    }
-                  },
-                  authordetail
-                            ),
-                             SizedBox(height: 10,),
-                             customtextfeild(
-                              Icon(Icons.image, color: Colors.pink,),
-                              'Enter Cover Page Link here',
-                             (value) {
-                            if (value.isEmpty) {
-                      Text('Please Enter a link from internet For cover page of Book');
-                    }
-                  },
-                  coverlink
-                            ),
-                             SizedBox(height: 10,),
-                             customtextfeild(
-                              Icon(Icons.g_mobiledata_outlined, color: Colors.pink,),
-                              'Enter Google drive Link',
-                             (value) {
-                            if (value.isEmpty) {
-                      Text('Please Enter Download link with permission with link');
-                    }
-                  },
-              
-                  gdrivelink
-                            ),
-                            SizedBox(height: 10,),
-                             customtextfeild(
-                              Icon(Icons.account_box, color: Colors.pink,),
-                              'Enter Your Name',
-                             (value) {
-                            if (value.isEmpty) {
-                      Text('Please Enter Your Full name');
-                    }
-                  },
-                  yournmae
-                            ),
-                            TextButton(onPressed: ()async{
-                             if(_formkey.currentState!.validate()){
-                              setState(() {
-                               loading = true;
-                              });
-                               await sendtoadmin();
-                               yournmae.clear();
-                               authordetail.clear();
-                               booktitle.clear();
-                               gdrivelink.clear();
-                               coverlink.clear();
-                               detail.clear();
-                               setState(() {
-                                 loading = false;
-                               });
-                             }
-                            }, child: Material(color: Colors.pink[300],
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: loading ? CircularProgressIndicator(value: 20,) :Text('Submit To Admin', style: TextStyle(color:  Colors.white)),
-                              )))
-                            ],
-                          ),
-                        )),
+                        Form(
+                            key: _formkey,
+                            child: Container(
+                              decoration: BoxDecoration(),
+                              child: Column(
+                                children: [
+                                  customtextfeild(
+                                      Icon(
+                                        Icons.book_outlined,
+                                        color: Colors.pink,
+                                      ),
+                                      'Enter Book Name',
+                                      booktitle),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  customtextfeild(
+                                      Icon(
+                                        Icons.manage_accounts,
+                                        color: Colors.pink,
+                                      ),
+                                      'Enter Author Names',
+                                      authordetail),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  customtextfeild(
+                                      Icon(
+                                        Icons.image,
+                                        color: Colors.pink,
+                                      ),
+                                      'Enter Cover Page Link here',
+                                      coverlink),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  customtextfeild(
+                                      Icon(
+                                        Icons.g_mobiledata_outlined,
+                                        color: Colors.pink,
+                                      ),
+                                      'Enter Google drive Link',
+                                      gdrivelink),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  customtextfeild(
+                                      Icon(
+                                        Icons.account_box,
+                                        color: Colors.pink,
+                                      ),
+                                      'Enter Your Name',
+                                      yournmae),
+                                  TextButton(
+                                      onPressed: () async {
+                                        if (_formkey.currentState!.validate()) {
+                                          setState(() {
+                                            loading = true;
+                                          });
+                                          await sendtoadmin();
+                                          yournmae.clear();
+                                          authordetail.clear();
+                                          booktitle.clear();
+                                          gdrivelink.clear();
+                                          coverlink.clear();
+                                          detail.clear();
+                                          setState(() {
+                                            loading = false;
+                                          });
+                                        }
+                                      },
+                                      child: Material(
+                                          color: Colors.pink[300],
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(10.0),
+                                            child: loading
+                                                ? CircularProgressIndicator(
+                                                    value: 20,
+                                                  )
+                                                : Text('Submit To Admin',
+                                                    style: TextStyle(
+                                                        color: Colors.white)),
+                                          )))
+                                ],
+                              ),
+                            )),
                         //  Text('${widget.title}',)
-                          ],
+                      ],
                     ),
                   )
                 ],

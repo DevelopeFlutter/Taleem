@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, avoid_print, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, avoid_print, prefer_const_literals_to_create_immutables, non_constant_identifier_names, must_be_immutable, use_key_in_widget_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,14 +16,18 @@ import '../model/usermodel.dart';
 import '../widgets/course_card.dart';
 import 'drawer.dart';
 
-class HomeScreenbook extends StatefulWidget {
-  const HomeScreenbook({Key? key}) : super(key: key);
+class AllBooksView extends StatefulWidget {
+  AllBooksView(
+      {required this.collectionName, this.BannerId, this.InterstialId});
 
+  String collectionName = '';
+  String? BannerId = '';
+  String? InterstialId = '';
   @override
-  State<HomeScreenbook> createState() => _HomeScreenbookState();
+  State<AllBooksView> createState() => _AllBooksViewState();
 }
 
-class _HomeScreenbookState extends State<HomeScreenbook> {
+class _AllBooksViewState extends State<AllBooksView> {
   final _scaffoldkey = GlobalKey<ScaffoldState>();
   bool hasusersearched = false;
   bool loading = false;
@@ -60,7 +64,6 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    print('Called');
   }
 
   @override
@@ -92,7 +95,7 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
         loadins = true;
       });
       final result = await FirebaseFirestore.instance
-          .collection('Books')
+          .collection(widget.collectionName)
           .where('searchkeyword', arrayContains: query.toUpperCase())
           .get();
       setState(() {
@@ -102,7 +105,8 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
     }
   }
 
-  final refcolec = FirebaseFirestore.instance.collection('Books');
+  late final refcolec =
+      FirebaseFirestore.instance.collection(widget.collectionName);
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +158,11 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
                               }),
                           Spacer(),
                           Text(
-                            'BOOKS HUB',
+                            widget.collectionName == 'Courses'
+                                ? 'Courses HUB'
+                                : widget.collectionName == 'PPT'
+                                    ? "PPT's HUB"
+                                    : 'BOOKS HUB',
                             style: GoogleFonts.kanit(
                                 fontSize: 25,
                                 fontWeight: FontWeight.w700,
@@ -273,12 +281,13 @@ class _HomeScreenbookState extends State<HomeScreenbook> {
                           : Expanded(
                               child: StreamBuilder(
                                 stream: FirebaseFirestore.instance
-                                    .collection('Books')
+                                    .collection(widget.collectionName)
                                     .snapshots(),
                                 builder: (context,
                                     AsyncSnapshot<QuerySnapshot> snapshot) {
                                   if (snapshot.data == null) {
-                                    return CircularProgressIndicator();
+                                    return Center(
+                                        child: CircularProgressIndicator());
                                   }
                                   return ListView.builder(
                                     shrinkWrap: true,

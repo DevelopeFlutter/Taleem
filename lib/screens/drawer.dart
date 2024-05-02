@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:course_hub/screens/udemycourses.dart';
-import 'package:course_hub/screens/medicalBooks.dart';
+import 'package:course_hub/screens/allBooksViewScreen.dart';
 import 'package:course_hub/screens/pptscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +52,11 @@ Widget drawer(BuildContext context) {
           child: ListTile(
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => HomeScreenbook()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => AllBooksView(
+                            collectionName: 'Books',
+                          )));
             },
             title: Text(
               'Books',
@@ -84,7 +88,9 @@ Widget drawer(BuildContext context) {
           child: ListTile(
             onTap: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => UdemyCourses()));
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => AllBooksView(collectionName: 'Courses')));
             },
             title: Text(
               'Udemy Courses',

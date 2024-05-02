@@ -2,13 +2,14 @@
 
 import 'dart:ffi';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:course_hub/helper/Adids.dart';
 import 'package:course_hub/main.dart';
 import 'package:course_hub/screens/AllProgrammesViews/allprogrammesViewsList.dart';
 
 import 'package:course_hub/screens/udemycourses.dart';
-import 'package:course_hub/screens/medicalBooks.dart';
+import 'package:course_hub/screens/allBooksViewScreen.dart';
 import 'package:course_hub/screens/pptscreen.dart';
 import 'package:course_hub/screens/support.dart';
 import 'package:course_hub/widgets/bookscategoriescontainer.dart';
@@ -169,7 +170,9 @@ class _GotohomeState extends State<Gotohome> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (_) => HomeScreenbook()));
+                                    builder: (_) => AllBooksView(
+                                          collectionName: 'Books',
+                                        )));
                           },
                           child: CategoriesContainer(
                               context,
@@ -209,7 +212,9 @@ class _GotohomeState extends State<Gotohome> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (_) => HomeScreenPPT()));
+                                    builder: (_) => AllBooksView(
+                                          collectionName: 'Computer_science',
+                                        )));
                           },
                           child: CategoriesContainer(
                               context,
@@ -229,7 +234,9 @@ class _GotohomeState extends State<Gotohome> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (_) => HomeScreenPPT()));
+                                    builder: (_) => AllBooksView(
+                                          collectionName: 'Books',
+                                        )));
                           },
                           child: CategoriesContainer(
                               context,
@@ -248,7 +255,9 @@ class _GotohomeState extends State<Gotohome> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (_) => HomeScreenPPT()));
+                                    builder: (_) => AllBooksView(
+                                          collectionName: 'Books',
+                                        )));
                           },
                           child: Padding(
                               padding: EdgeInsets.only(),
@@ -283,46 +292,62 @@ class _GotohomeState extends State<Gotohome> {
                 SizedBox(
                   height: mheight * 20 / mheight,
                 ),
-                InkWell(
-                  onTap: () {
-                    if (loading) {
-                      interstitialAd!.show();
-                    }
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => UdemyCourses()));
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.pinkAccent[200],
-                        borderRadius: BorderRadius.circular(10)),
-                    height: 100,
-                    width: screenwidth(context) * .9,
-                    child: Center(
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              'Udemy Courses',
-                              style: GoogleFonts.kanit(
-                                  color: Color(0xff0F3460),
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w700),
-                            ),
+                CarouselSlider(
+                  items: [
+                    InkWell(
+                      onTap: () {
+                        if (loading) {
+                          interstitialAd!.show();
+                        }
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) =>
+                                    AllBooksView(collectionName: 'Courses')));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.pinkAccent[200],
+                            borderRadius: BorderRadius.circular(10)),
+                        width: screenwidth(context) * .9,
+                        child: Center(
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Udemy Courses',
+                                  style: GoogleFonts.kanit(
+                                      color: Color(0xff0F3460),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ),
+                              Spacer(),
+                              Image(
+                                image: AssetImage(
+                                  'assets/images/course.png',
+                                ),
+                                width: 60,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              )
+                            ],
                           ),
-                          Spacer(),
-                          Image(
-                            image: AssetImage(
-                              'assets/images/course.png',
-                            ),
-                            width: 60,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          )
-                        ],
+                        ),
                       ),
                     ),
+                  ],
+                  options: CarouselOptions(
+                    height: mheight * 100 / mheight,
+                    enlargeCenterPage: true,
+                    autoPlay: true,
+                    // aspectRatio: 16 / 9,
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enableInfiniteScroll: true,
+                    autoPlayAnimationDuration: Duration(milliseconds: 800),
+                    // viewportFraction: 0.8,
                   ),
                 ),
                 SizedBox(

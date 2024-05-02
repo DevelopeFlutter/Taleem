@@ -7,7 +7,6 @@ import '../helper/helper.dart';
 
 class Aboutus extends StatefulWidget {
   const Aboutus({Key? key}) : super(key: key);
-
   @override
   State<Aboutus> createState() => _AboutusState();
 }

@@ -28,9 +28,13 @@ class _LogIn_regState extends State<LogIn_reg> {
   TextEditingController pass = TextEditingController();
   TextEditingController pass2 = TextEditingController();
   Authservices authservices = Authservices();
+  bool topheight = false;
+  
+
 
   signinsignup() async {
     if (_formkey.currentState!.validate()) {
+      print('Validator called');
       setState(() {
         _isloading = true;
       });
@@ -59,7 +63,7 @@ class _LogIn_regState extends State<LogIn_reg> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.only(top: 60.0, left: 20, right: 20),
+            padding: const EdgeInsets.only(top: 60, left: 20, right: 20),
             child: Form(
               key: _formkey,
               child: Column(
@@ -92,11 +96,9 @@ class _LogIn_regState extends State<LogIn_reg> {
                           Icons.account_box,
                           color: Constant().pinkcolor,
                         ),
-                        'Enter full name here', (value) {
-                      if (value.isEmpty) {
-                        Text('Please Enter Your Full name');
-                      }
-                    }, fullname),
+                        'Enter full name here',
+                         
+                     fullname),
                   SizedBox(
                     height: 10,
                   ),
@@ -105,11 +107,9 @@ class _LogIn_regState extends State<LogIn_reg> {
                         Icons.email_rounded,
                         color: Constant().pinkcolor,
                       ),
-                      'Enter email here', (value) {
-                    if (value.isEmpty) {
-                      Text('Please Enter Your Full name');
-                    }
-                  }, email),
+                      'Enter email here', 
+                     
+                   email),
                   SizedBox(
                     height: 10,
                   ),
@@ -118,11 +118,8 @@ class _LogIn_regState extends State<LogIn_reg> {
                         Icons.password_outlined,
                         color: Constant().pinkcolor,
                       ),
-                      'Enter password here', (value) {
-                    if (value.isEmpty) {
-                      Text('Please Enter Your Full name');
-                    }
-                  }, pass),
+                      'Enter password here', 
+                     pass),
                   SizedBox(
                     height: 10,
                   ),

@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, file_names, must_be_immutable, unnecessary_this
 
-
+import 'package:course_hub/widgets/Books_description_widget.dart';
+import 'package:course_hub/widgets/responsive_widgets.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -9,7 +11,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:readmore/readmore.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 
 import '../helper/Adids.dart';
 import '../helper/helper.dart';
@@ -47,7 +48,7 @@ class _AboutscreenState extends State<Aboutscreen> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     InterstitialAd.load(
-        adUnitId:InterstitialID1,
+        adUnitId: InterstitialID1,
         request: AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
             onAdLoaded: ((ad) {
@@ -172,15 +173,13 @@ class _AboutscreenState extends State<Aboutscreen> {
                         Text(
                           'Taleem',
                           style: GoogleFonts.kanit(
-                              fontSize: 25,
+                              fontSize: mheight * 25 / mheight,
                               fontWeight: FontWeight.w700,
                               letterSpacing: 1,
                               color: Colors.white),
                         ),
                         Spacer(),
-                        // CircleAvatar(
-                        //   backgroundColor: Color(0xffF8F8F8),
-                        // )
+                       
                       ],
                     ),
                   ),
@@ -199,32 +198,25 @@ class _AboutscreenState extends State<Aboutscreen> {
                             image: NetworkImage(widget.imglink))),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 30.0),
+                responsiveLeftRightPadding(
+                  left: 25,
+                  right: 10,
                   child: Row(
                     children: [
-                      Expanded(
-                        child: Text(
-                          widget.coursename,
-                          textAlign: TextAlign.left,
-                          softWrap: true,
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.kanit(
-                              color: Colors.white,
-                              fontSize: 30,
-                              fontWeight: FontWeight.w700),
-                        ),
-                      ),
+                      descriptionText(
+                        widget.coursename,
+                        mheight * 30 / mheight,
+                        Colors.white,
+                        FontWeight.w700,
+                      )
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 25.0,
-                    right: 10,
-                    top: 2,
-                  ),
+                responsiveLeftRighBottomToptPadding(
+                  left: 25,
+                  right: 10,
+                  top: 2,
+                  bottom: 0,
                   child: Row(
                     children: [
                       Icon(
@@ -232,48 +224,30 @@ class _AboutscreenState extends State<Aboutscreen> {
                         color: Color(0xffE94560),
                       ),
                       SizedBox(
-                        width: 10,
+                        width: mwidth * 10 / mwidth,
                       ),
-                      Text(
+                      descriptionText(
                         widget.tutorname,
-                        style: GoogleFonts.kanit(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xffe94560)),
-                        textAlign: TextAlign.left,
-                      ),
-                       
+                        mheight * 20 / mheight,
+                        Color(0xffe94560),
+                        FontWeight.w400,
+                      )
                     ],
                   ),
                 ),
-                 Padding(
-                  padding: const EdgeInsets.only(
-                    left: 25.0,
-                    right: 10,
-                    top: 2,
-                  ),
-                  child: Row(
-                    children: [
-                      Text('Provided By: ', style: GoogleFonts.kanit(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xffe94560)),),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        widget.sendername,
-                        style: GoogleFonts.kanit(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xffe94560)),
-                        textAlign: TextAlign.left,
-                      ),
-                       
-                    ],
+                responsiveLeftRighBottomToptPadding(
+                  left: 25.0,
+                  right: 10,
+                  top: 2,
+                  bottom: 0,
+                  child: Text(
+                    'Provided By:  ${widget.sendername} ',
+                    style: GoogleFonts.kanit(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xffe94560)),
                   ),
                 ),
-                
                 addloadd
                     ? Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -283,27 +257,20 @@ class _AboutscreenState extends State<Aboutscreen> {
                         ),
                       )
                     : SizedBox(
-                        height: 50,
-                        child: Center(
-                          child: Text(
-                            '.',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
+                        height: mheight * 50 / mheight,
                       ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 25.0,
-                    right: 10,
-                    top: 2,
-                  ),
+                responsiveLeftRighBottomToptPadding(
+                  left: 25.0,
+                  right: 10,
+                  top: 2,
+                  bottom: 0,
                   child: Row(
                     children: [
                       Expanded(
                           child: ReadMoreText(
                         widget.about,
                         style: GoogleFonts.kanit(
-                            fontSize: 18,
+                            fontSize: mheight * 18 / mheight,
                             color: Colors.white,
                             fontWeight: FontWeight.w400),
                         trimLines: 2,
@@ -422,16 +389,15 @@ class Aboutpptscreen extends StatefulWidget {
   String downloadlink;
   String demolink;
   String sendername;
-  Aboutpptscreen(
-      {Key? key,
-      required this.coursename,
-      required this.imglink,
-      required this.demolink,
-      required this.downloadlink,
-      required this.tutorname,
-      required this.sendername,
-      })
-      : super(key: key);
+  Aboutpptscreen({
+    Key? key,
+    required this.coursename,
+    required this.imglink,
+    required this.demolink,
+    required this.downloadlink,
+    required this.tutorname,
+    required this.sendername,
+  }) : super(key: key);
 
   @override
   State<Aboutpptscreen> createState() => _AboutpptscreenState();
@@ -458,7 +424,7 @@ class _AboutpptscreenState extends State<Aboutpptscreen> {
             onAdFailedToLoad: ((error) {})));
     bannerad = BannerAd(
         size: AdSize.banner,
-        adUnitId:BannerID1,
+        adUnitId: BannerID1,
         listener: BannerAdListener(onAdLoaded: (ad) {
           setState(() {
             addloadd = true;
@@ -644,7 +610,7 @@ class _AboutpptscreenState extends State<Aboutpptscreen> {
                     ],
                   ),
                 ),
-                 Padding(
+                Padding(
                   padding: const EdgeInsets.only(
                     left: 25.0,
                     right: 10,
@@ -708,7 +674,7 @@ class _AboutpptscreenState extends State<Aboutpptscreen> {
                 //         trimCollapsedText: 'Show more',
                 //         trimExpandedText: 'Show less',
                 //         moreStyle: TextStyle(
-                //             fontSize: 16,
+                //             fontSize: 16,``````````````````````````
                 //             color: Colors.pink,
                 //             fontWeight: FontWeight.bold),
                 //       )),

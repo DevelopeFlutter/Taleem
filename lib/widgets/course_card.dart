@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../helper/helper.dart';
-import '../screens/About.dart';
+import '../screens/bookDescription.dart';
 
 Widget coursecard(
   BuildContext context,

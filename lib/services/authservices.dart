@@ -27,23 +27,47 @@ class Authservices {
             MaterialPageRoute(builder: (_) => const Gotohome()),
             (route) => false);
       }).catchError((e) {
-        showsnackar(context, e.toString());
+        print('$e This is the e ');
+        if (e is FirebaseAuthException) {
+          print('$e Exception');
+          if (e.toString() ==
+              '[firebase_auth/email-already-in-use] The email address is already in use by another account.') {
+            showsnackar(context, e.code);
+          } else if (e.toString() ==
+              '[firebase_auth/invalid-email] The email address is badly formatted.') {
+            showsnackar(context, e.code);
+          } else if (e.code == 'network-request-failed') {
+            showsnackar(context, e.code);
+          }
+        }
+        print(e.toString());
+        return null;
       });
     } catch (e) {
       showsnackar(context, e.toString());
     }
   }
 
-  Future signn(String email, String pass, BuildContext context) async {
+  Future signn(String email, String pass, BuildContext context)async {
     try {
-      userCredential = await auth
-          .signInWithEmailAndPassword(email: email, password: pass)
-          .then((value) {
+      userCredential = await auth.signInWithEmailAndPassword(email: email, password: pass).then((value) {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (_) => const Gotohome()),
             (route) => false);
+      }).catchError((e) {
+        if (e is FirebaseAuthException){
+          print('${e.code}: Message');
+          if (e.code == 'user-not-found') {
+            showsnackar(context, e.code);
+          } else if (e.code == 'too-many-requests'){
+            showsnackar(context, e.toString());
+          } else if (e.code == 'network-request-failed') {
+            showsnackar(context, e.toString());
+          }
+        }
       });
     } catch (e) {
+      print('$e this is the error ');
       showsnackar(context, e.toString());
     }
   }
@@ -61,33 +85,32 @@ class Authservices {
       MaterialPageRoute(builder: (_) => const LogIn_reg()),
     );
   }
-  Future ticketdetail( BuildContext context,
-    String title, String author, String dicription, String doctitle)async{
-  
-      try{
-        String result = DateFormat('yyyy-MM-dd H:m:s').format(DateTime.now());
-          await  Databaseservices(uid: result.toString())
-            .postticketdetailtofirestore(
-             title, author, dicription, doctitle,
-            );
-      }catch(e){
+
+  Future ticketdetail(BuildContext context, String title, String author,
+      String dicription, String doctitle) async {
+    try {
+      String result = DateFormat('yyyy-MM-dd H:m:s').format(DateTime.now());
+      await Databaseservices(uid: result.toString())
+          .postticketdetailtofirestore(
+        title,
+        author,
+        dicription,
+        doctitle,
+      );
+    } catch (e) {
       showsnackar(context, e.toString());
-      }
+    }
   }
 
-  donationdetail( BuildContext context,
-    String booktitle, String authorname, String coverlink, String booklink, String yourname) async{
-      try{
-        String result = DateFormat('yyyy-MM-dd H:m:s').format(DateTime.now());
-          await  Databaseservices(uid: result.toString())
-            .postbookdetailtofirestoreforadmin(
-             booktitle, authorname, coverlink, booklink, yourname
-            );
-      }catch(e){
+  donationdetail(BuildContext context, String booktitle, String authorname,
+      String coverlink, String booklink, String yourname) async {
+    try {
+      String result = DateFormat('yyyy-MM-dd H:m:s').format(DateTime.now());
+      await Databaseservices(uid: result.toString())
+          .postbookdetailtofirestoreforadmin(
+              booktitle, authorname, coverlink, booklink, yourname);
+    } catch (e) {
       showsnackar(context, e.toString());
-      }
     }
-
-
-
+  }
 }
